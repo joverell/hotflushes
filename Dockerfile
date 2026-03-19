@@ -15,6 +15,7 @@ RUN npm run build
 
 # Stage 3: Runner
 FROM node:20-alpine AS runner
+RUN apk add --no-cache su-exec
 WORKDIR /app
 
 ENV NODE_ENV production
@@ -36,8 +37,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Entrypoint script
 COPY --chown=nextjs:nodejs entrypoint.sh ./
 RUN chmod +x entrypoint.sh
-
-USER nextjs
 
 EXPOSE 3000
 ENV PORT 3000

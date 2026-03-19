@@ -10,13 +10,21 @@ fi
 
 # Seed public assets if volume is empty
 if [ ! -d "/app/public/images" ] || [ ! "$(ls -A /app/public/images)" ]; then
-  echo "Seeding public assets volume..."
-  mkdir -p /app/public
-  cp -r /app/public_seed/. /app/public/
+  echo "Seeding images volume..."
+  mkdir -p /app/public/images
+  cp -r /app/public_seed/images/. /app/public/images/
 fi
 
-# Ensure permissions are correct before starting
-# (Optional, but helps if volumes were created by root)
-# chown -R nextjs:nodejs /app/content /app/public
+if [ ! -d "/app/public/audio" ] || [ ! "$(ls -A /app/public/audio)" ]; then
+  echo "Seeding audio volume..."
+  mkdir -p /app/public/audio
+  cp -r /app/public_seed/audio/. /app/public/audio/
+fi
 
-exec "$@"
+# Ensure permissions are correct on volumes (handles root-owned bind mounts)
+echo "Fixing permissions..."
+chown -R nextjs:nodejs /app/content /app/public
+
+# Drop privileges and run the command
+echo "Starting application as nextjs..."
+exec su-exec nextjs "$@"
