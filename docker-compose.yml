@@ -6,7 +6,7 @@ services:
     container_name: hotflushes-web
     restart: always
     ports:
-      - "3001:3000"
+      - "${APP_PORT:-3005}:3000"
     volumes:
       - ./content:/app/content
       - ./public/images:/app/public/images
