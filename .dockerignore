@@ -2,9 +2,8 @@ node_modules
 .next
 .git
 .gitignore
-*.md
 Dockerfile
 docker-compose.yml
 .env.local
 public/images/uploads
-content/pages
+# We want to keep content/pages and base images for seeding
