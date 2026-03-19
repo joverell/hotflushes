@@ -1,1 +1,78 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", "Geist", "ui-sans-serif", "system-ui";
+  --font-serif: "Playfair Display", "ui-serif", "Georgia";
+
+  --color-primary: #fce4ec; /* Soft Rose */
+  --color-secondary: #2d3436; /* Charcoal */
+  --color-background: #fcfbf8; /* Cream */
+  --color-foreground: #1a1a1a;
+  --color-accent: #d4af37; /* Soft Gold */
+  --color-muted: #f1f0ee;
+  --color-card: #ffffff;
+  --color-border: #e2e2e0;
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+/* MDX Editor Overrides */
+.mdx-editor-custom {
+  @apply flex-grow h-full bg-white rounded-xl border border-primary/20 shadow-inner overflow-auto;
+}
+
+.mdxeditor-root-contenteditable {
+  @apply min-h-[60vh] p-8 focus:outline-none prose prose-rose font-serif max-w-none;
+}
+
+.mdxeditor-toolbar {
+  @apply border-b bg-muted/30 p-2 flex flex-wrap gap-1 rounded-t-xl;
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.mdxeditor-toolbar button {
+  @apply hover:bg-white transition-colors duration-200;
+  background-color: transparent !important;
+}
+
+/* COVID Highlight */
+.covid-highlight {
+  color: #c2410c !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 1.25rem !important;
+  display: block !important;
+}
+
+.covid-year {
+  color: #c2410c !important;
+  font-weight: 700 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+.covid-list-item {
+  color: #c2410c !important;
+  font-weight: 500 !important;
+  list-style-type: disc !important;
+  margin-left: 1.5rem !important;
+}
+
+.covid-section {
+  @apply my-12 p-8 border-2 border-[#c2410c]/20 rounded-2xl bg-[#c2410c]/5;
+}

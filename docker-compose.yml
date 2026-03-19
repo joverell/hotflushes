@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: hotflushes-web
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./content:/app/content
+      - ./public/images:/app/public/images
+    environment:
+      # Default password for initial login
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
