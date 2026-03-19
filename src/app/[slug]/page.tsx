@@ -6,7 +6,9 @@ import { TestimonialCard } from "@/components/cms/TestimonialCard";
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  console.log(`[REQUEST] Attempting to load slug: ${slug}`);
   const page = getPageBySlug(slug);
+  console.log(`[REQUEST] Result for ${slug}: ${page ? 'FOUND' : 'NOT FOUND'}`);
 
   if (!page) {
     notFound();
