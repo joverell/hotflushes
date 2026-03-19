@@ -4,6 +4,13 @@ import matter from "gray-matter";
 
 const pagesDirectory = path.join(process.cwd(), "content/pages");
 
+console.log("CWD:", process.cwd());
+console.log("Pages Directory Path:", pagesDirectory);
+console.log("Pages Directory Exists:", fs.existsSync(pagesDirectory));
+if (fs.existsSync(pagesDirectory)) {
+  console.log("Pages found:", fs.readdirSync(pagesDirectory));
+}
+
 export interface PageData {
   slug: string;
   title: string;
@@ -16,6 +23,7 @@ export interface PageData {
 export function getPageBySlug(slug: string): PageData | null {
   try {
     const fullPath = path.join(pagesDirectory, `${slug}.md`);
+    console.log(`Searching for page: ${slug} at ${fullPath}. Exists: ${fs.existsSync(fullPath)}`);
     if (!fs.existsSync(fullPath)) return null;
     
     const fileContents = fs.readFileSync(fullPath, "utf8");
