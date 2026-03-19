@@ -29,6 +29,9 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/content ./content
+# Create a seed directory that won't be overwritten by volumes
+COPY --from=builder --chown=nextjs:nodejs /app/content ./content_seed
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public_seed
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing

@@ -2,14 +2,19 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const pagesDirectory = path.join(process.cwd(), "content/pages");
+const getPagesDirectory = () => {
+  const primary = path.join(process.cwd(), "content/pages");
+  const seed = path.join(process.cwd(), "content_seed/pages");
+  
+  if (fs.existsSync(primary) && fs.readdirSync(primary).some(f => f.endsWith('.md'))) {
+    return primary;
+  }
+  
+  console.log("Using SEED content directory (primary was missing or empty)");
+  return seed;
+};
 
-console.log("CWD:", process.cwd());
-console.log("Pages Directory Path:", pagesDirectory);
-console.log("Pages Directory Exists:", fs.existsSync(pagesDirectory));
-if (fs.existsSync(pagesDirectory)) {
-  console.log("Pages found:", fs.readdirSync(pagesDirectory));
-}
+const pagesDirectory = getPagesDirectory();
 
 export interface PageData {
   slug: string;
