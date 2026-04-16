@@ -16,3 +16,5 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123}
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
